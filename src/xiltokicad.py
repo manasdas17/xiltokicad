@@ -8,7 +8,6 @@ def getPinsFromLines(data):
     y = 4
     pins = {}
     while data[y] != '\n':
-        print data[y]
         partedline = data[y].split('\t')
         data[y] = [partedline[1], partedline[2], partedline[3].strip()]
         partedline[0] = partedline[0].strip('P')
@@ -26,7 +25,7 @@ def countBanks(pins):
         if banks.has_key(value[0]):
             banks[value[0]] = banks[value[0]] + 1
         else:
-            banks[value[0]] = 0
+            banks[value[0]] = 1
     return banks
 
 """
@@ -60,6 +59,7 @@ def main():
     pins = getPinsFromLines(data)
     bankCount = countBanks(pins)
     
+        
 
 
 main()
