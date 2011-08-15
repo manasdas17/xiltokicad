@@ -1,1 +1,3 @@
 small script to convert a xilinx ascii pinout description to a kicad library
+
+if you want to help, look at the TODO-list, there are a lot of ideas for further improvement and I probably will never implement these
