@@ -29,9 +29,19 @@ def countBanks(pins):
     return banks
 
 """
-funktion um aus einem dictionary einzelne schaltplanfiguren zu bauen, aufgeteilt nach 
+draws all the pins in the symbol
+e.g.:
+X pin1 0 500 100 150 L 50 50 1 1 I
+x <pinname> <pinnumber> <Xpos> <Ypos> <pinlength> <orientation> <Snum> <Sname> <Partnuber> 1 <electrical type>
+Snum/Sname: Pinnumber/name textsize (default 50)
 """
 def drawPins():
+    pinlength = "150"
+    pinxpos = "350"
+    orientation = "L"
+    snum = "50"
+    sname = "50"
+    eletype = "I"
     return False
 
 
@@ -39,11 +49,26 @@ def drawPins():
 funktion um den header der lib zu schreiben, z.B.:
 EESchema-LIBRARY Version 2.3  Date: Mon 15 Aug 2011 11:35:57 PM CEST
 """
-def writeLibHeader():
-    return "EESchema-Library 2.3"
+# TODO: add the date and time of library creation
+# TODO: write the full header unti DRAW
+def writeLibHeader(name, bankCount):
+    header = []
+    header.append("EESchema-LIBRARY Version 2.3 \nDEF ")
+    # begin DEF row
+    header.append(name)
+    header.append(" IC 0 40 Y Y ")
+    header.append(str(bankCount))
+    header.append(" F N\n")
+    # end DEF row
+    
+    # begin field0
+    header.append("F0 \"IC\" ")
+    # end field0
+    
+    return ''.join(header)
 
 """
-function to read the whole file and stor its conten in a list (line by line)
+function to read the whole file and store its content in a list (line by line)
 """
 def readData(path):
     f = open(path, "r")
@@ -59,7 +84,8 @@ def main():
     pins = getPinsFromLines(data)
     bankCount = countBanks(pins)
     
-        
+    name = "Spartan6LX9"
+    print writeLibHeader(name, len(bankCount))
 
 
 main()
